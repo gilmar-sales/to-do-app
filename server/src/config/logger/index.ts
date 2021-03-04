@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 
-export class MyLogger extends Logger {
+export default class MyLogger extends Logger {
   log(message: string) {
     super.log(message);
   }
