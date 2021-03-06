@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType()
@@ -16,7 +16,15 @@ export class User {
   @Column()
   email: string;
 
-  @Field()
+  @HideField()
   @Column()
   password: string;
+
+  @Field()
+  @Column({ default: 'NOW()' })
+  createdAt: Date;
+
+  @Field()
+  @Column({ default: 'NOW()', onUpdate: 'NOW()' })
+  updatedAt: Date;
 }
