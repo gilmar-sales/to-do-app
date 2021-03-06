@@ -12,11 +12,21 @@ export class UserService {
   async createUser(data: UserInput): Promise<User> {
     const checkEmail = await this.repository.findOne({ email: data.email });
 
-    if (!checkEmail) throw new BadRequestException('E-mail already in use');
+    if (checkEmail) throw new BadRequestException('E-mail already in use');
 
     const user = this.repository.create(data);
 
     return this.repository.save(user);
+  }
+
+  async deleteUser(data: number): Promise<boolean> {
+    const user = await this.repository
+      .createQueryBuilder()
+      .delete()
+      .where('id = :id', { id: data })
+      .execute();
+
+    return Boolean(user.affected);
   }
 
   async findUsers(): Promise<User[]> {
