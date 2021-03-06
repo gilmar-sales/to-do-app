@@ -6,7 +6,7 @@ const NODE_ENV: string = process.env.NODE_ENV || 'development';
 
 // postgres
 const POSTGRES_URL: string = +process.env.POSTGRES_PORT
-  ? `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}`
+  ? `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB}`
   : process.env.POSTGRES_URL;
 
 // typeorm
